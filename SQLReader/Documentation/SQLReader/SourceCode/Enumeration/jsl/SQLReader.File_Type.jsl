@@ -1,0 +1,14 @@
+public enum File_Type {
+    
+    // Hex value is: 00000000
+    /** @attribute Description("Rows")*/
+    ROWS(0),
+    
+    // Hex value is: 00000001
+    /** @attribute Description("Log")*/
+    LOG(1),
+    
+    // Hex value is: 00000004
+    /** @attribute Description("Full-text")*/
+    FULLTEXT(4)
+}

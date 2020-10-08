@@ -1,0 +1,98 @@
+public enum Object_Type {
+    
+    // Hex value is: 00000000
+    /** @attribute Description("Aggregate function (CLR)")*/
+    AF(0),
+    
+    // Hex value is: 00000001
+    /** @attribute Description("CHECK constraint")*/
+    C(1),
+    
+    // Hex value is: 00000002
+    /** @attribute Description("DEFAULT (constraint or stand-alone)")*/
+    D(2),
+    
+    // Hex value is: 00000003
+    /** @attribute Description("FOREIGN KEY constraint")*/
+    F(3),
+    
+    // Hex value is: 00000004
+    /** @attribute Description("PRIMARY KEY constraint")*/
+    PK(4),
+    
+    // Hex value is: 00000005
+    /** @attribute Description("SQL stored procedure")*/
+    P(5),
+    
+    // Hex value is: 00000006
+    /** @attribute Description("Assembly (CLR) stored procedure")*/
+    PC(6),
+    
+    // Hex value is: 00000007
+    /** @attribute Description("SQL scalar function")*/
+    FN(7),
+    
+    // Hex value is: 00000008
+    /** @attribute Description("Assembly (CLR) scalar function")*/
+    FS(8),
+    
+    // Hex value is: 00000009
+    /** @attribute Description("Assembly (CLR) table-valued function")*/
+    FT(9),
+    
+    // Hex value is: 0000000a
+    /** @attribute Description("Rule (old-style, stand-alone)")*/
+    R(10),
+    
+    // Hex value is: 0000000b
+    /** @attribute Description("Replication-filter-procedure")*/
+    RF(11),
+    
+    // Hex value is: 0000000c
+    /** @attribute Description("System base table")*/
+    S(12),
+    
+    // Hex value is: 0000000d
+    /** @attribute Description("Synonym")*/
+    SN(13),
+    
+    // Hex value is: 0000000e
+    /** @attribute Description("Service queue")*/
+    SQ(14),
+    
+    // Hex value is: 0000000f
+    /** @attribute Description("Assembly (CLR) DML trigger")*/
+    TA(15),
+    
+    // Hex value is: 00000010
+    /** @attribute Description("SQL DML trigger")*/
+    TR(16),
+    
+    // Hex value is: 00000011
+    /** @attribute Description("SQL inline table-valued function")*/
+    IF(17),
+    
+    // Hex value is: 00000012
+    /** @attribute Description("SQL table-valued-function")*/
+    TF(18),
+    
+    // Hex value is: 00000013
+    /** @attribute Description("Table (user-defined)")*/
+    U(19),
+    
+    // Hex value is: 00000014
+    /** @attribute Description("UNIQUE constraint")*/
+    UQ(20),
+    
+    // Hex value is: 00000015
+    /** @attribute Description("View")*/
+    V(21),
+    
+    // Hex value is: 00000016
+    /** @attribute Description("Extended stored procedure")*/
+    X(22),
+    
+    // Hex value is: 00000017
+    /** @attribute Description("Internal table")*/
+    IT(23)
+}

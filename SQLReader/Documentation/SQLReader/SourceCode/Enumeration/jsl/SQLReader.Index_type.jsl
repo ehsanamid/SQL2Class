@@ -1,0 +1,18 @@
+public enum Index_type {
+    
+    // Hex value is: 00000001
+    /** @attribute Description("Heap")*/
+    Heap(1),
+    
+    // Hex value is: 00000002
+    /** @attribute Description("Clustered")*/
+    Clustered(2),
+    
+    // Hex value is: 00000004
+    /** @attribute Description("Nonclustered")*/
+    Nonclustered(4),
+    
+    // Hex value is: 00000008
+    /** @attribute Description("XML")*/
+    XML(8)
+}

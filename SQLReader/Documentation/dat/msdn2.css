@@ -1,0 +1,260 @@
+BODY
+	{
+		font-family: Segoe UI, Arial, Tahoma, MS Sans Serif, Verdana;
+		font-size: 11px;
+	}
+
+BODY.typeassembly, BODY.typenamespace, BODY.typeclass, BODY.typedelegate, BODY.typeenumeration, BODY.typestructure, BODY.typeinterface
+	{
+		margin: 10px 10px 10px 10px;
+	}
+
+BODY.menu
+	{
+		margin: 10px 0px 10px 10px;
+	}
+
+A.liketext
+	{
+		text-decoration: none;
+		color:black;
+	}
+
+IMG.mid
+	{
+		vertical-align: middle;
+	}
+
+IMG.midmgR
+	{
+		vertical-align: middle;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 5px 0px 0px;
+	}
+
+IMG.midclkmgR
+	{
+		vertical-align: middle;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 5px 0px 0px;
+		cursor:hand;
+	}
+
+IMG.midmgL
+	{
+		vertical-align: middle;		
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 5px;
+	}
+	
+IMG.midmgLR
+	{
+		vertical-align: middle;		
+		padding: 0px 0px 0px 0px;
+		margin: 0px 5px 0px 5px;
+	}
+
+TABLE
+	{
+		font-family: Segoe UI, Arial, Tahoma, MS Sans Serif, Verdana;
+		font-size: 11px;
+	}
+
+TABLE.subline
+	{
+		width:100%;
+		height:100%;
+		border:0;
+		background-color: LightGrey;
+		border-top: 1 solid LightGrey;
+		FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=White,endColorStr=LightGrey);
+	}	
+
+TABLE.toolbar
+	{
+		width:100%;
+		height:100%;
+		border:0;
+		background-color: LightGray;
+		border-top: 3 solid #FF3300;
+		FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=White,endColorStr=LightGrey);
+	}
+
+TD.tdhead
+	{
+		vertical-align: middle;
+		background-color: gray;
+		font-weight: bold;
+		height:22px;
+	}
+
+TD.tdbold
+	{
+		font-weight: bold;
+	}
+
+TD.tditem
+	{
+		vertical-align: top;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		border-right-style: solid;
+		border-right-width: 1px;
+		padding: 5px 5px 5px 5px;
+	}
+
+TD.tditemimg
+	{
+		vertical-align: top;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		width:40px;
+		/*text-align: center;*/
+	}
+
+TD.toolbarright
+	{
+		text-align: right;
+	}
+
+H1
+	{
+		font-family: Segoe UI, Arial, Tahoma, MS Sans Serif, Verdana;
+		font-size: 22px;
+		font-weight: bold;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 10px 0px;
+	}
+
+H1.clk
+	{
+		font-size: 20px;
+		font-weight: bold;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 10px 0px;
+		cursor:hand;
+	}
+
+H2
+	{
+		font-size: 14px;
+		font-weight: bold;
+		padding: 0px 0px 0px 0px;
+		margin: 25px 0px 5px 0px;
+	}
+
+H2.clk
+	{
+		font-size: 14px;
+		font-weight: bold;
+		padding: 0px 0px 0px 0px;
+		margin: 25px 0px 5px 0px;
+		cursor:hand;
+	}
+
+H2.assemblyclk
+	{
+		font-size: 14px;
+		font-weight: bold;
+		padding: 0px 0px 0px 0px;
+		margin: 5px 0px 5px 0px;
+		cursor:hand;
+	}
+
+H3
+	{
+		font-size: 12px;
+		font-weight: bold;
+		padding: 0px 0px 0px 0px;
+		margin: 25px 0px 0px 0px;
+	}
+
+HR
+	{
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+	}
+
+P
+	{
+		padding: 0px 0px 5px 0px;
+		margin: 0px 0px 5px 0px;
+	}
+
+P.medium
+	{
+		padding: 0px 0px 0px 0px;
+		margin: 10px 0px 10px 0px;
+	}
+
+LI
+	{
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 5px 0px;
+	}
+
+P.mnuitem
+	{
+		margin: 0px 0px 0px 0px;
+	}
+
+DIV.subheader
+	{
+		font-size: 11px;
+		padding: 0px 0px 0px 0px;
+		margin: 0px 0px 0px 0px;
+	}
+
+DIV.mnuitem
+	{
+		font-size: 11px;
+		padding: 0px 0px 0px 10px;
+		margin: 2px 0px 2px 0px;
+	}
+
+DIV.clk
+	{
+		cursor:hand;
+	}
+
+DIV.mnuitemclk
+	{
+		cursor:hand;
+		margin: 2px 0px 2px 0px;
+	}
+
+PRE.code
+	{
+		border: 1px solid Gainsboro;
+		background-color: WhiteSmoke;
+		padding: 10px 10px 10px 10px;
+		margin: 0px 0px 0px 0px;
+	}
+DIV.over
+	{
+		padding:2;
+		height:100%;
+		cursor:hand;
+		display:inline;
+		border: 1 outset LightGrey;
+		FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ffd553,endColorStr=#fff5d3);
+	}
+DIV.down
+	{
+		padding:2;
+		height:100%;
+		cursor:hand;
+		display:inline;
+		border: 1 inset LightGrey;
+		FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=LightGrey,endColorStr=White);
+	}
+DIV.out
+	{
+	
+		padding:2;
+		height:100%;
+		cursor:hand;
+		display:inline;
+		border: 1 outset LightGrey;
+		FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=White,endColorStr=LightGrey);
+	}

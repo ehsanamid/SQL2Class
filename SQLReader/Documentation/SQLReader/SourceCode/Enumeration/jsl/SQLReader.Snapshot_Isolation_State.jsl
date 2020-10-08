@@ -1,0 +1,25 @@
+public enum Snapshot_Isolation_State {
+    
+    // Hex value is: 00000000
+    /** @attribute Description("Snapshot isolation state is OFF (default). Snapshot isolation is disallowed.")*/
+    OFF(0),
+    
+    // Hex value is: 00000001
+    /** @attribute Description("Snapshot isolation state ON. Snapshot isolation is allowed.")*/
+    ON(1),
+    
+    // Hex value is: 00000002
+    /** @attribute Description("Snapshot isolation state is in transition to OFF state. All transactions have the" +
+"ir modifications versioned. Cannot start new transactions using snapshot isolati" +
+"on. The database remains in the transition to OFF state until all transactions t" +
+"hat were active when ALTER DATABASE was run can be completed.")*/
+    IN_TRANSITION_TO_ON(2),
+    
+    // Hex value is: 00000003
+    /** @attribute Description("Snapshot isolation state is in transition to ON state. New transactions have thei" +
+"r modifications versioned. Transactions cannot use snapshot isolation until the " +
+"snapshot isolation state becomes 1 (ON). The database remains in the transition " +
+"to ON state until all update transactions that were active when ALTER DATABASE w" +
+"as run can be completed.")*/
+    IN_TRANSITION_TO_OFF(3)
+}

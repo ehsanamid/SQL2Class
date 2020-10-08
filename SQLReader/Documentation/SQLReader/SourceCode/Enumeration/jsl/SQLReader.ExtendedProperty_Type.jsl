@@ -1,0 +1,70 @@
+public enum ExtendedProperty_Type {
+    
+    // Hex value is: 00000000
+    /** @attribute Description("Database")*/
+    DATABASE(0),
+    
+    // Hex value is: 00000001
+    /** @attribute Description("Object or column")*/
+    OBJECT_OR_COLUMN(1),
+    
+    // Hex value is: 00000002
+    /** @attribute Description("Parameter")*/
+    PARAMETER(2),
+    
+    // Hex value is: 00000003
+    /** @attribute Description("Schema")*/
+    SCHEMA(3),
+    
+    // Hex value is: 00000004
+    /** @attribute Description("Database principal")*/
+    DATABASE_PRINCIPAL(4),
+    
+    // Hex value is: 00000005
+    /** @attribute Description("Assembly")*/
+    ASSEMBLY(5),
+    
+    // Hex value is: 00000006
+    /** @attribute Description("Type")*/
+    TYPE(6),
+    
+    // Hex value is: 00000007
+    /** @attribute Description("Index")*/
+    INDEX(7),
+    
+    // Hex value is: 0000000a
+    /** @attribute Description("XML schema collection")*/
+    XML_SCHEMA_COLLECTION(10),
+    
+    // Hex value is: 0000000f
+    /** @attribute Description("Message type")*/
+    MESSAGE_TYPE(15),
+    
+    // Hex value is: 00000010
+    /** @attribute Description("Service contract")*/
+    SERVICE_CONTRACT(16),
+    
+    // Hex value is: 00000011
+    /** @attribute Description("Service")*/
+    SERVICE(17),
+    
+    // Hex value is: 00000012
+    /** @attribute Description("Remote service binding")*/
+    REMOTE_SERVICE_BINDING(18),
+    
+    // Hex value is: 00000013
+    /** @attribute Description("Route")*/
+    ROUTE(19),
+    
+    // Hex value is: 00000014
+    /** @attribute Description("Dataspace (filegroup or partition scheme)")*/
+    DATASPACE_FILEGROUP_OR_PARTITION_SCHEME(20),
+    
+    // Hex value is: 00000015
+    /** @attribute Description("Partition function")*/
+    PARTITION_FUNCTION(21),
+    
+    // Hex value is: 00000016
+    /** @attribute Description("Database file")*/
+    DATABASE_FILE(22)
+}

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SQLRead.Column">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIABaACgRAAiEACBAAQAsBASAF4UMKAFAUQwEQ0AgGA=</HashCode>
+      <FileName>Objects\Columns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.Columns">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQACAQBAACAAEAAAAoAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Objects\Columns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.Database">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwLHYHnkwhhgVOThgKcB+q0KCFkcDqMkLCZRi6RQ/I8=</HashCode>
+      <FileName>Objects\Databases.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.Databases" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAQBAACGAEQAQAoAAAAAAAAAAgAABAAAAIAAA=</HashCode>
+      <FileName>Objects\Databases.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.foreign_key_column" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAgSwQAAAAAAAAAABoAABAAAAAAQBIFAAACAAgCI=</HashCode>
+      <FileName>Objects\Foreign_key_columns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.foreign_key_columns" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAQBAACAAERAAAoAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Objects\Foreign_key_columns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.foreign_key" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CBCBKwCkUIAkgDQgBAwRoAAWAAMNCAABIBAAAYAFyAA=</HashCode>
+      <FileName>Objects\Foreign_keys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.foreign_keys" Collapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAQBAACAAEAACAoAAAAAAAAgCAAAAAAAAAgAA=</HashCode>
+      <FileName>Objects\Foreign_keys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.Table" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CBHLZgCkUIIoJCYADCYB5MUdABMNgJGHAMAAAIgAzSA=</HashCode>
+      <FileName>Objects\Tables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.Tables" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAQBAASEAMQAAAoBAAAYIAAAAAAAAAAAgAgAA=</HashCode>
+      <FileName>Objects\Tables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.TableStat" Collapsed="true">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAgAAgIAAgABAAAAAAAAABAAAAEAAAAAAAA=</HashCode>
+      <FileName>Objects\Tables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.SQL_Type" Collapsed="true">
+    <Position X="19" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAIACkQAAgEAABAAYAoBAGAEgVEiAACAAwEA0BiCA=</HashCode>
+      <FileName>Objects\Types.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.SQL_Types" Collapsed="true">
+    <Position X="20.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQCAQBAACAAEAAAAoAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Types.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SQLRead.SQLServer">
+    <Position X="23" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAQEYgAAAAAAUAIAAAAAAAAAAgAAIAAABIAAA=</HashCode>
+      <FileName>Objects\SQLServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="SQLRead.LoadingAssociatedObjects" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Objects\Databases.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="SQLRead.FinishedLoading" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Databases.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

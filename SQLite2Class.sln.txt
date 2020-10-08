@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLRead", "SQLReader\SQLRead.csproj", "{09911F5D-7ABB-49F7-A86D-6C303EC950F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{C3F79AEB-6D8F-48FA-8CD4-FADD02F4BADB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09911F5D-7ABB-49F7-A86D-6C303EC950F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09911F5D-7ABB-49F7-A86D-6C303EC950F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09911F5D-7ABB-49F7-A86D-6C303EC950F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09911F5D-7ABB-49F7-A86D-6C303EC950F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3F79AEB-6D8F-48FA-8CD4-FADD02F4BADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3F79AEB-6D8F-48FA-8CD4-FADD02F4BADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3F79AEB-6D8F-48FA-8CD4-FADD02F4BADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3F79AEB-6D8F-48FA-8CD4-FADD02F4BADB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
