@@ -155,16 +155,42 @@ namespace DCS
             tableclass_CodeTypeDeclaration.Members[StartRegion].StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Static SQL String Memebers"));
             tableclass_CodeTypeDeclaration.Members[tableclass_CodeTypeDeclaration.Members.Count - 1].EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
+            #region Constructor
+
+            CodeConstructor codeconstructor = new CodeConstructor();
+            codeconstructor.CustomAttributes.Add(new CodeAttributeDeclaration("Description", new CodeAttributeArgument(new CodePrimitiveExpression("Constructor"))));
+            foreach (SQLiteTableColumn sqlitetablecolumn in _sqlitetable.listSQLiteTableColumn)
+            {
+                if (sqlitetablecolumn.IsForeignKey)
+                {
+                    codeconstructor.Parameters.Add(new CodeParameterDeclarationExpression(sqlitetablecolumn.ReferncedTablelist[0].TableName, "_parent"));
+
+
+                    CodeFieldReferenceExpression codefieldreferenceexpression = new CodeFieldReferenceExpression();
+                    codefieldreferenceexpression.FieldName = "_Parent_" + sqlitetablecolumn.ReferncedTablelist[0].TableName;
+
+                    CodeAssignStatement AssignValue = new CodeAssignStatement(codefieldreferenceexpression, new CodeVariableReferenceExpression("_parent"));
+                    codeconstructor.Statements.Add(AssignValue);
+                }
+                //"_" + _sqlitetablecolumn.ReferncedTablelist[0].ColumnName + "_" + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
+            }
+
+
+            codeconstructor.Attributes = MemberAttributes.Public;
+
+
+            tableclass_CodeTypeDeclaration.Members.Add(codeconstructor);
+
+            #endregion
             
 
             StartRegion = tableclass_CodeTypeDeclaration.Members.Count;
             foreach (SQLiteTableColumn sqlitetablecolumn in _sqlitetable.listSQLiteTableColumn)
             {
-
                 FieldColumnCreate(sqlitetablecolumn, tableclass_CodeTypeDeclaration);
                 PropertyColumnCreate(sqlitetablecolumn, tableclass_CodeTypeDeclaration);
-
             }
+            
             tableclass_CodeTypeDeclaration.Members[StartRegion].StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Tables Memebers"));
             tableclass_CodeTypeDeclaration.Members[tableclass_CodeTypeDeclaration.Members.Count - 1].EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
 
@@ -194,8 +220,10 @@ namespace DCS
                         for (int i = 0; i < sqlitetablecolumn.ReferncedTablelist.Count; i++)
                         {
                             FieldRefObjectCollectionLockCreate(sqlitetablecolumn, i, tableclass_CodeTypeDeclaration);
-                            FieldRefObjectCollectionCreate(sqlitetablecolumn,i, tableclass_CodeTypeDeclaration);
-                            PropertyRefObjectCollectionCreate(sqlitetablecolumn,i, tableclass_CodeTypeDeclaration);
+                            FieldRefObjectCollectionCreate1(sqlitetablecolumn,i, tableclass_CodeTypeDeclaration);
+                            PropertyRefObjectCollectionCreate1(sqlitetablecolumn,i, tableclass_CodeTypeDeclaration);
+                            //FieldRefObjectCollectionCreate(sqlitetablecolumn,i, tableclass_CodeTypeDeclaration);
+                            //PropertyRefObjectCollectionCreate(sqlitetablecolumn,i, tableclass_CodeTypeDeclaration);
                         }
                     }
                 }
@@ -214,7 +242,7 @@ namespace DCS
             InsertMethod(_sqlitetable, tableclass_CodeTypeDeclaration);
             UpdateMethod(_sqlitetable.tableName, tableclass_CodeTypeDeclaration);
 
-            ConstructorMethod(_sqlitetable, tableclass_CodeTypeDeclaration);
+            //ConstructorMethod(_sqlitetable, tableclass_CodeTypeDeclaration);
 
             tableclass_CodeTypeDeclaration.Members[StartRegion].StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Public Methods"));
             tableclass_CodeTypeDeclaration.Members[tableclass_CodeTypeDeclaration.Members.Count - 1].EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, string.Empty));
@@ -236,7 +264,7 @@ namespace DCS
             Classdelegate( _sqlitetable,  SourceCodeNamespace);
 
 
-            ClassCollection(_sqlitetable, SourceCodeNamespace);
+           // ClassCollection(_sqlitetable, SourceCodeNamespace);
 
             CodeGeneratorOptions options = new CodeGeneratorOptions();
             //options.BracingStyle = "C";
@@ -466,7 +494,8 @@ namespace DCS
             CodeMemberField codememberfield = new CodeMemberField();
             codememberfield.Attributes = MemberAttributes.Final | CodeDomGenerator.GetModifier(CodeDomGenerator.FieldModifier);
             codememberfield.Type = new CodeTypeReference(_sqlitetablecolumn.ReferncedTablelist[0].TableName);
-            codememberfield.Name = "_" + _sqlitetablecolumn.ReferncedTablelist[0].ColumnName + "_" + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
+            //codememberfield.Name = "_" + _sqlitetablecolumn.ReferncedTablelist[0].ColumnName + "_" + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
+            codememberfield.Name = "_Parent_"  + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
             if (CodeDomGenerator.AddComments)
                 codememberfield.Comments.Add(new CodeCommentStatement("<remarks>Represents the foreign key object</remarks>", true));
 
@@ -480,19 +509,21 @@ namespace DCS
             codememberproperty.Type = new CodeTypeReference(_sqlitetablecolumn.ReferncedTablelist[0].TableName);
             if (CodeDomGenerator.MapDescription)
                 codememberproperty.CustomAttributes.Add(new CodeAttributeDeclaration("Description", new CodeAttributeArgument(new CodePrimitiveExpression("Represents the foreign key object of the type " + _sqlitetablecolumn.ReferncedTablelist[0].ColumnName))));
-            codememberproperty.Name = "m_"+_sqlitetablecolumn.ReferncedTablelist[0].ColumnName + "_" + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
+            //codememberproperty.Name = "m_"+_sqlitetablecolumn.ReferncedTablelist[0].ColumnName + "_" + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
+            codememberproperty.Name = "m_Parent_" + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
             codememberproperty.HasGet = true;
 
             CodeFieldReferenceExpression codefieldreferenceexpression = new CodeFieldReferenceExpression();
-            codefieldreferenceexpression.FieldName = "_" + _sqlitetablecolumn.ReferncedTablelist[0].ColumnName + "_" + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
+            //codefieldreferenceexpression.FieldName = "_" + _sqlitetablecolumn.ReferncedTablelist[0].ColumnName + "_" + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
+            codefieldreferenceexpression.FieldName = "_Parent_"  + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
             CodeMethodReturnStatement codemethodreturnstatement = new CodeMethodReturnStatement(codefieldreferenceexpression);
 
             codememberproperty.GetStatements.Add(codemethodreturnstatement);
 
 
             CodeFieldReferenceExpression codefieldreferenceexpressionleft = new CodeFieldReferenceExpression();
-            codefieldreferenceexpressionleft.FieldName = "_" + _sqlitetablecolumn.ReferncedTablelist[0].ColumnName + "_" + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
-
+            //codefieldreferenceexpressionleft.FieldName = "_" + _sqlitetablecolumn.ReferncedTablelist[0].ColumnName + "_" + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
+			codefieldreferenceexpressionleft.FieldName =  "_Parent_" + _sqlitetablecolumn.ReferncedTablelist[0].TableName;
             CodeAssignStatement AssignValue = new CodeAssignStatement(codefieldreferenceexpressionleft, new CodeVariableReferenceExpression("value"));
             codememberproperty.SetStatements.Add(AssignValue);
 
@@ -520,38 +551,25 @@ namespace DCS
         
         
         public static void FieldRefObjectCollectionCreate(SQLiteTableColumn _sqlitetablecolumn,int index,  CodeTypeDeclaration tableclass_CodeTypeDeclaration)
-        {
-
-            //CodeFieldReferenceExpression speedFieldReference = new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), "_Speed");
-
-            //CodeBinaryOperatorExpression addExpression = new CodeBinaryOperatorExpression(
-            //    speedFieldReference, CodeBinaryOperatorType.Add, new CodePrimitiveExpression(10));
-
-            //CodeAssignStatement assignStatement = new CodeAssignStatement(speedFieldReference, addExpression);
-            
+        {          
             CodeMemberField codememberfield = new CodeMemberField();
             codememberfield.Attributes = MemberAttributes.Final | CodeDomGenerator.GetModifier(CodeDomGenerator.FieldModifier);
             codememberfield.Type = new CodeTypeReference(_sqlitetablecolumn.ReferncedTablelist[index].TableName + "Collection");
-            codememberfield.Name = "_" +_sqlitetablecolumn.ReferncedTablelist[index].TableName + "Collection";
-            
-            
+            codememberfield.Name = "_" +_sqlitetablecolumn.ReferncedTablelist[index].TableName + "Collection";   
             if (CodeDomGenerator.AddComments)
                 codememberfield.Comments.Add(new CodeCommentStatement("<remarks>Represents the foreign key object</remarks>", true));
-
             tableclass_CodeTypeDeclaration.Members.Add(codememberfield);
-
-
-           
-
         }
         
-
-        //if (_tblFormalParameterCollection == null)
-        //        {
-        //            m_tblFormalParameterCollection = new tblFormalParameterCollection(this);
-        //            _tblFormalParameterCollection.Load();
-        //        }
-        //        return _tblFormalParameterCollection;
+        public static void FieldRefObjectCollectionCreate1(SQLiteTableColumn _sqlitetablecolumn,int index,  CodeTypeDeclaration tableclass_CodeTypeDeclaration)
+        {    	
+        	CodeMemberField codememberfield = new CodeMemberField();
+            codememberfield.Attributes = MemberAttributes.Final | CodeDomGenerator.GetModifier(CodeDomGenerator.FieldModifier);
+            codememberfield.Type = new CodeTypeReference("List", new CodeTypeReference(_sqlitetablecolumn.ReferncedTablelist[index].TableName));
+            codememberfield.Name ="_" +_sqlitetablecolumn.ReferncedTablelist[index].TableName + "Collection";
+            tableclass_CodeTypeDeclaration.Members.Add(codememberfield);
+         }
+             
         public static void PropertyRefObjectCollectionCreate(SQLiteTableColumn _sqlitetablecolumn,int index, CodeTypeDeclaration tableclass_CodeTypeDeclaration)
         {
             CodeMemberProperty codememberproperty = new CodeMemberProperty();
@@ -584,6 +602,75 @@ namespace DCS
             CodeSnippetStatement snippet3 = new CodeSnippetStatement();
             
             ///////////////
+            CodeMethodReturnStatement codemethodreturnstatement = new CodeMethodReturnStatement(codefieldreferenceexpression);
+            
+
+            codememberproperty.GetStatements.Add(codemethodreturnstatement);
+
+            snippet3.Value = "              }";
+
+            codememberproperty.GetStatements.Add(snippet3);
+
+            CodeFieldReferenceExpression codefieldreferenceexpressionleft = new CodeFieldReferenceExpression();
+            codefieldreferenceexpressionleft.FieldName = "_" +_sqlitetablecolumn.ReferncedTablelist[index].TableName + "Collection";
+
+            CodeAssignStatement AssignValue = new CodeAssignStatement(codefieldreferenceexpressionleft, new CodeVariableReferenceExpression("value"));
+            codememberproperty.SetStatements.Add(AssignValue);
+
+            codememberproperty.HasSet = true;
+            
+            tableclass_CodeTypeDeclaration.Members.Add(codememberproperty);
+
+           
+
+        }
+        
+        public static void PropertyRefObjectCollectionCreate1(SQLiteTableColumn _sqlitetablecolumn,int index, CodeTypeDeclaration tableclass_CodeTypeDeclaration)
+        {
+            CodeMemberProperty codememberproperty = new CodeMemberProperty();
+            codememberproperty.Attributes = MemberAttributes.Final | CodeDomGenerator.GetModifier(CodeDomGenerator.PropertyModifier);
+            codememberproperty.Type = new CodeTypeReference("List", new CodeTypeReference(_sqlitetablecolumn.ReferncedTablelist[index].TableName));
+            if (CodeDomGenerator.MapDescription)
+                codememberproperty.CustomAttributes.Add(new CodeAttributeDeclaration("Description", new CodeAttributeArgument(new CodePrimitiveExpression("Represents the foreign key object of the type " + _sqlitetablecolumn.ReferncedTablelist[index].ColumnName))));
+            codememberproperty.Name = "m_"+_sqlitetablecolumn.ReferncedTablelist[index].TableName + "Collection";
+            codememberproperty.HasGet = true;
+
+            CodeFieldReferenceExpression codefieldreferenceexpression = new CodeFieldReferenceExpression();
+            codefieldreferenceexpression.FieldName = "_" +_sqlitetablecolumn.ReferncedTablelist[index].TableName + "Collection";
+            string temp = _sqlitetablecolumn.ReferncedTablelist[index].TableName + "Collection";
+            
+            
+            CodeTypeReference ListParms = new CodeTypeReference("List", new CodeTypeReference(_sqlitetablecolumn.ReferncedTablelist[index].TableName));
+           // codemembermethod.Statements.Add(new CodeVariableDeclarationStatement(ListParms, "SqlParmColl", new CodeObjectCreateExpression(ListParms, new CodeExpression[] { })));
+
+            
+            CodeVariableReferenceExpression CodeVariableReferenceExpression = new CodeVariableReferenceExpression(codefieldreferenceexpression.FieldName + " == null");
+            CodeAssignStatement as1 = new CodeAssignStatement(new CodeVariableReferenceExpression(codefieldreferenceexpression.FieldName), new CodeObjectCreateExpression(ListParms, new CodeExpression[] { }));
+            //CodeExpressionStatement as2 = new CodeExpressionStatement(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("_" + _sqlitetablecolumn.ReferncedTablelist[index].TableName + "Collection"), "Load"));
+            
+//            CodeMethodInvokeExpression cmre = new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "Load");
+//            CodeExpressionStatement as2 = new CodeExpressionStatement(cmre);
+            //codeWhile.Statements.Add(new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "AddFromRecordSet"), new CodeExpression[] { new CodeVariableReferenceExpression("rs") }));
+            
+            
+            CodeConditionStatement IfLength = new CodeConditionStatement(CodeVariableReferenceExpression, new CodeStatement[] { as1 /* ,as2*/});
+            
+            
+            CodeSnippetStatement snippet1 = new CodeSnippetStatement();
+            snippet1.Value = "              lock(_" + temp+"Lock)";
+            CodeSnippetStatement snippet2 = new CodeSnippetStatement();
+            snippet2.Value = "              {";
+           
+            codememberproperty.GetStatements.Add(snippet1);
+            codememberproperty.GetStatements.Add(snippet2);
+            
+            
+            codememberproperty.GetStatements.Add(IfLength);
+
+            CodeSnippetStatement snippet3 = new CodeSnippetStatement();
+            
+            
+            
             CodeMethodReturnStatement codemethodreturnstatement = new CodeMethodReturnStatement(codefieldreferenceexpression);
             
 
