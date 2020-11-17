@@ -868,11 +868,12 @@ namespace DCS
         {
             CodeMemberMethod codemembermethod = new CodeMemberMethod();
             codemembermethod.Attributes = MemberAttributes.Public | MemberAttributes.Final;
-            codemembermethod.Name = "Load"+_sqlitetablecolumn.ReferncedTablelist[index].TableName;
+            string refTbale = _sqlitetablecolumn.ReferncedTablelist[index].TableName;
+            codemembermethod.Name = "Load"+refTbale;
 
             //codemembermethod.Parameters.Add(new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(string)), "ConnectionString"));
 
-            codemembermethod.ReturnType = new CodeTypeReference(typeof(bool));
+            codemembermethod.ReturnType = new CodeTypeReference(typeof(int));
 
             CodeTryCatchFinallyStatement Try = new CodeTryCatchFinallyStatement();
 
@@ -891,7 +892,7 @@ namespace DCS
             Try.TryStatements.Add(new CodeVariableDeclarationStatement("SQLiteDataReader", "myReader", new CodePrimitiveExpression(null)));
             Try.TryStatements.Add(new CodeVariableDeclarationStatement("SQLiteCommand", "myCommand", new CodeObjectCreateExpression("SQLiteCommand")));
             Try.TryStatements.Add(new CodeAssignStatement(new CodeVariableReferenceExpression("myReader"), new CodePrimitiveExpression(null)));
-            string str =  "\"" + "SELECT * FROM [" + _sqlitetablecolumn.ReferncedTablelist[index].TableName+"]  WHERE ["+ _sqlitetablecolumn.ColumnName + "]= " + _sqlitetablecolumn.ColumnName + ";" + "\"";
+            string str =  "\"" + "SELECT * FROM [" + refTbale+"]  WHERE ["+ _sqlitetablecolumn.ColumnName + "]= " + _sqlitetablecolumn.ColumnName + ";" + "\"";
             Try.TryStatements.Add(new CodeAssignStatement(new CodePropertyReferenceExpression(new CodeTypeReferenceExpression("myCommand"), "CommandText"), new CodeSnippetExpression( str) ));
             Try.TryStatements.Add(new CodeAssignStatement(new CodePropertyReferenceExpression(new CodeTypeReferenceExpression("myCommand"), "Connection"), new CodeFieldReferenceExpression(new CodeTypeReferenceExpression("Common"), "Conn")));
             Try.TryStatements.Add(new CodeAssignStatement(new CodeVariableReferenceExpression("myReader"), new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myCommand"), "ExecuteReader")));
@@ -899,23 +900,45 @@ namespace DCS
             
             CodeIterationStatement codeWhile = new CodeIterationStatement();
             codeWhile.TestExpression = new CodeSnippetExpression("myReader.Read()");
-            str  = _sqlitetablecolumn.ReferncedTablelist[index].TableName;
-            codeWhile.Statements.Add(new CodeVariableDeclarationStatement(str, str.ToLower(), new CodeObjectCreateExpression(str, new CodeThisReferenceExpression())));
+            
+            
+            CodeVariableDeclarationStatement codeVariableDeclarationStatement = new CodeVariableDeclarationStatement(refTbale, refTbale.ToLower(), new CodeObjectCreateExpression(refTbale, new CodeThisReferenceExpression()));
+            codeWhile.Statements.Add(codeVariableDeclarationStatement);
+            
             
             codeWhile.IncrementStatement = new CodeSnippetStatement(null);
             codeWhile.InitStatement = new CodeSnippetStatement(null);
             
-            foreach (SQLiteTable _sqlitetable in Global.Instance.SqliteDatabase.listSQLiteTable)
-            {
-                if (_sqlitetable.tableName == tablename)
-                {
-                    generateTableCode(_sqlitetable, provider);
-                }
-            }
             
-            foreach (SQLiteTableColumn column in _sqlitetablecolumn.ReferncedTablelist[index].listSQLiteTableColumn)
-            {
-                /*
+            foreach (SQLiteTable _refsqlitetable in Global.Instance.SqliteDatabase.listSQLiteTable) {
+				if (_refsqlitetable.tableName == refTbale) {
+					foreach (SQLiteTableColumn col in _refsqlitetable.listSQLiteTableColumn) 
+					{
+						CodeMethodInvokeExpression cmieAddRange;
+						switch(col.ColumnType.ToLower())
+						{
+							case "string":
+							case "varchar":
+								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetString");
+								break;
+							default:
+								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetInt64");
+								break;
+								
+						}
+						 
+						cmieAddRange.Parameters.Add(new CodeMethodInvokeExpression(null, "myReader.GetOrdinal", new CodeExpression[] { new CodePrimitiveExpression(col.ColumnName) }));
+						//CodeFieldReferenceExpression codeFieldReferenceExpression = new CodeFieldReferenceExpression(new CodeTypeReferenceExpression("myReader"), "GetInt64");
+						CodePropertyReferenceExpression codePropertyReferenceExpression = new CodePropertyReferenceExpression(new CodeTypeReferenceExpression(refTbale.ToLower()), col.ColumnName);
+						codeWhile.Statements.Add(new CodeAssignStatement(codePropertyReferenceExpression, cmieAddRange));
+					}
+					
+					string collectionName = "m_"+_sqlitetablecolumn.ReferncedTablelist[index].TableName + "Collection";
+					CodeMethodInvokeExpression cmieAddRange1 = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression(collectionName), "Add");					 
+					cmieAddRange1.Parameters.Add(new CodeVariableReferenceExpression(codeVariableDeclarationStatement.Name));
+					codeWhile.Statements.Add(cmieAddRange1);
+					
+            		/*
                     CodeConditionStatement ccs = new CodeConditionStatement();
                     CodeMethodReferenceExpression GetOrdinalMethod = new CodeMethodReferenceExpression(new CodeSnippetExpression("rs"), "GetOrdinal");
                     CodeMethodInvokeExpression InvokeGetOrdinalMethod = new CodeMethodInvokeExpression(GetOrdinalMethod, new CodeExpression[] { new CodePrimitiveExpression(column.ColumnName) });
@@ -936,30 +959,16 @@ namespace DCS
                     Try.TryStatements.Add(ccs);
                     rscounter++;
                     */
-                
-            }
+				}
+			}
+            
+            
             
             
             Try.TryStatements.Add(codeWhile);
             
-//            Try.TryStatements.Add(new CodeVariableDeclarationStatement("SQLiteCommand", "Com", new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("Common.Conn"), "CreateCommand")));
-//            Try.TryStatements.Add(new CodeVariableDeclarationStatement("SQLiteCommand", "ComSync", new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("Common.Conn"), "CreateCommand")));
-            Try.TryStatements.Add(new CodeAssignStatement(new CodePropertyReferenceExpression(new CodeTypeReferenceExpression("Com"), "CommandText"), new CodeFieldReferenceExpression(new CodeTypeReferenceExpression(_tablename), "SQL_Delete")));
-            Try.TryStatements.Add(new CodeAssignStatement(new CodePropertyReferenceExpression(new CodeTypeReferenceExpression("ComSync"), "CommandText"), new CodeSnippetExpression( "\"PRAGMA foreign_keys=ON\"") ));
-
-            CodeMethodInvokeExpression cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("Com.Parameters"), "AddRange");
-            cmieAddRange.Parameters.Add(new CodeMethodInvokeExpression(null, "GetSqlParameters", new CodeExpression[] { }));
-            Try.TryStatements.Add(cmieAddRange);
-            //Try.TryStatements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("Conn"), "Open"));
-
-            Try.TryStatements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("ComSync"), "ExecuteNonQuery"));
-            
-            Try.TryStatements.Add(new CodeVariableDeclarationStatement(typeof(int), "rowseffected", new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("Com"), "ExecuteNonQuery")));
-            //Try.TryStatements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("Conn"), "Close"));
-            Try.TryStatements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("ComSync"), "Dispose"));
-            Try.TryStatements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("Com"), "Dispose"));
-            //Try.TryStatements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("Conn"), "Dispose"));
-            Try.TryStatements.Add(new CodeMethodInvokeExpression(new CodeThisReferenceExpression(), "PostDeleteTriger"));
+            Try.TryStatements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "Close"));
+            Try.TryStatements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myCommand"), "Dispose"));
             Try.TryStatements.Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(0)));
 
             codemembermethod.Statements.Add(Try);
