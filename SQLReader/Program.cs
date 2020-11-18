@@ -30,41 +30,9 @@ namespace DCS
             Global.Instance.SqliteDatabase.LoadAssociatedObjects();
             Global.Instance.SqliteDatabase.Save2CSV();
             
-            //generateCode(new CSharpCodeProvider());
-            generateCode(new CSharpCodeProvider() , "tblProject");
-            //generateCode(new CSharpCodeProvider(), "tblSolution");
-            //generateCode(new CSharpCodeProvider(), "tblAlarm");
-            //generateCode(new CSharpCodeProvider(), "tblAlarmGroup");
-            //generateCode(new CSharpCodeProvider(), "tblPlantStructure");
-            //generateCode(new CSharpCodeProvider(), "tblInstrumentUnits");
-            //generateCode(new CSharpCodeProvider(), "tblInstrumentUnitsGrp");
-            //generateCode(new CSharpCodeProvider(), "tblEquipment");
-
-            //generateCode(new CSharpCodeProvider(), "tblDisplay");
-            //generateCode(new CSharpCodeProvider(), "tblEditBox");
-            //generateCode(new CSharpCodeProvider(), "tblFormalParameter");
-            //generateCode(new CSharpCodeProvider(), "tblVariable");
-            //generateCode(new CSharpCodeProvider(), "tblBOOL");
-            //generateCode(new CSharpCodeProvider(), "tblREAL");
-            //generateCode(new CSharpCodeProvider(), "tblPou");
-            //generateCode(new CSharpCodeProvider(), "tblFBDBlock");
-            //generateCode(new CSharpCodeProvider(), "tblFBDBlockPin");
-            //generateCode(new CSharpCodeProvider(), "tblFBDPinConnection");
-            //generateCode(new CSharpCodeProvider(), "tblFunction");
-            //generateCode(new CSharpCodeProvider(), "tblBlockState");
-            //generateCode(new CSharpCodeProvider(),"tblRect");
-            //generateCode(new CSharpCodeProvider(), "test");
-            //generateCode(new CSharpCodeProvider(), "tblADText");
-            //generateCode(new CSharpCodeProvider(), "tblBitmap");
-            //generateCode(new CSharpCodeProvider(), "tblSymbolBitmap");
-            //generateCode(new CSharpCodeProvider(), "tblSymbolRect");
-            //generateCode(new CSharpCodeProvider(), "tblSymbolPolyline");
-            //generateCode(new CSharpCodeProvider(), "tblSymbolPointsPolyline");
-            //generateCode(new CSharpCodeProvider(), "tblSymbolLine");
-            //generateCode(new CSharpCodeProvider(), "tblSymbolStatus");
-            //generateCode(new CSharpCodeProvider(), "tblSymbolADText");
-            //generateCode(new CSharpCodeProvider(), "tblSymbols");
-            //generateCode(new CSharpCodeProvider(), "tblPlantStructure");
+            generateCode(new CSharpCodeProvider());
+            //generateCode(new CSharpCodeProvider() , "tblProject");
+            
         }
 
         static void generateCode(CodeDomProvider provider,string tablename)
@@ -920,6 +888,9 @@ namespace DCS
 							case "string":
 							case "varchar":
 								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetString");
+								break;
+							case "datetime":
+								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetDateTime");
 								break;
 							default:
 								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetInt64");
