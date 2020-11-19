@@ -879,7 +879,8 @@ namespace DCS
             
             
             foreach (SQLiteTable _refsqlitetable in Global.Instance.SqliteDatabase.listSQLiteTable) {
-				if (_refsqlitetable.tableName == refTbale) {
+				if (_refsqlitetable.tableName == refTbale) 
+				{
 					foreach (SQLiteTableColumn col in _refsqlitetable.listSQLiteTableColumn) 
 					{
 						CodeMethodInvokeExpression cmieAddRange;
@@ -900,36 +901,27 @@ namespace DCS
 						 
 						cmieAddRange.Parameters.Add(new CodeMethodInvokeExpression(null, "myReader.GetOrdinal", new CodeExpression[] { new CodePrimitiveExpression(col.ColumnName) }));
 						//CodeFieldReferenceExpression codeFieldReferenceExpression = new CodeFieldReferenceExpression(new CodeTypeReferenceExpression("myReader"), "GetInt64");
-						CodePropertyReferenceExpression codePropertyReferenceExpression = new CodePropertyReferenceExpression(new CodeTypeReferenceExpression(refTbale.ToLower()), col.ColumnName);
+						CodePropertyReferenceExpression codePropertyReferenceExpression = new CodePropertyReferenceExpression(new CodeTypeReferenceExpression(codeVariableDeclarationStatement.Name), col.ColumnName);
 						codeWhile.Statements.Add(new CodeAssignStatement(codePropertyReferenceExpression, cmieAddRange));
+					}
+					
+					foreach (SQLiteTableColumn col in _refsqlitetable.listSQLiteTableColumn) 
+					{
+						if(col.IsReference)
+						{
+							foreach(ReferenceInfo refeinfo in col.ReferncedTablelist)
+							{
+								str = "Load" + refeinfo.TableName;
+								codeWhile.Statements.Add(new CodeMethodInvokeExpression(new CodeTypeReferenceExpression(codeVariableDeclarationStatement.Name), str));
+							}
+						}
 					}
 					
 					string collectionName = "m_"+_sqlitetablecolumn.ReferncedTablelist[index].TableName + "Collection";
 					CodeMethodInvokeExpression cmieAddRange1 = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression(collectionName), "Add");					 
 					cmieAddRange1.Parameters.Add(new CodeVariableReferenceExpression(codeVariableDeclarationStatement.Name));
 					codeWhile.Statements.Add(cmieAddRange1);
-					
-            		/*
-                    CodeConditionStatement ccs = new CodeConditionStatement();
-                    CodeMethodReferenceExpression GetOrdinalMethod = new CodeMethodReferenceExpression(new CodeSnippetExpression("rs"), "GetOrdinal");
-                    CodeMethodInvokeExpression InvokeGetOrdinalMethod = new CodeMethodInvokeExpression(GetOrdinalMethod, new CodeExpression[] { new CodePrimitiveExpression(column.ColumnName) });
-                    CodeMethodInvokeExpression InvokeIsDBNullMethod = new CodeMethodInvokeExpression(IsDBNullMethod, new CodeExpression[] { InvokeGetOrdinalMethod });
-                    ccs.Condition = new CodeBinaryOperatorExpression(InvokeIsDBNullMethod, CodeBinaryOperatorType.IdentityEquality, new CodePrimitiveExpression(false));
-                    CodeMethodReferenceExpression RSReaderMethod = new CodeMethodReferenceExpression(new CodeSnippetExpression("rs"), CodeDomGenerator.SqlDataReaderGetMethod(column.NetType));
-                    CodeMethodInvokeExpression InvokeRSReaderMethod = new CodeMethodInvokeExpression(RSReaderMethod, new CodeExpression[] { InvokeGetOrdinalMethod });
 
-                    CodeAssignStatement cas = new CodeAssignStatement(new CodePropertyReferenceExpression(null, CodeDomGenerator.TryCorrectNameNoWhitespace(column.ColumnName)),
-                                           new CodeCastExpression(column.NetType,
-                                               new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("Convert"), "ChangeType", new CodeExpression[] { new CodeArrayIndexerExpression(new CodeVariableReferenceExpression("rs"), new CodePrimitiveExpression(column.ColumnName)), new CodeTypeOfExpression(column.NetTypeColor) }
-                                               )
-                                               ));
-
-					CodeAssignStatement cas = new CodeAssignStatement(new CodePropertyReferenceExpression(new CodeTypeReferenceExpression("str"), "Connection"), new CodeFieldReferenceExpression(new CodeTypeReferenceExpression("Common"), "Conn")));	
-                    codeWhile.Statements.Add(cas);
-                    Try.TryStatements.Add(new CodeCommentStatement("if value from the recordset, to the " + column.ColumnName + " _databasename is NOT null then set the value."));
-                    Try.TryStatements.Add(ccs);
-                    rscounter++;
-                    */
 				}
 			}
             
