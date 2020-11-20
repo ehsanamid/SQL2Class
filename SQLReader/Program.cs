@@ -860,7 +860,8 @@ namespace DCS
             Try.TryStatements.Add(new CodeVariableDeclarationStatement("SQLiteDataReader", "myReader", new CodePrimitiveExpression(null)));
             Try.TryStatements.Add(new CodeVariableDeclarationStatement("SQLiteCommand", "myCommand", new CodeObjectCreateExpression("SQLiteCommand")));
             Try.TryStatements.Add(new CodeAssignStatement(new CodeVariableReferenceExpression("myReader"), new CodePrimitiveExpression(null)));
-            string str =  "\"" + "SELECT * FROM [" + refTbale+"]  WHERE ["+ _sqlitetablecolumn.ColumnName + "]= " + _sqlitetablecolumn.ColumnName + ";" + "\"";
+            //"SELECT * FROM [tblSignal]  WHERE [ClassID]= " + ClassID + ";";
+            string str =  "\"" + "SELECT * FROM [" + refTbale+"]  WHERE ["+ _sqlitetablecolumn.ColumnName + "]= " + "\"" + " + " + _sqlitetablecolumn.ColumnName + " + " + "\"" + ";" + "\"";
             Try.TryStatements.Add(new CodeAssignStatement(new CodePropertyReferenceExpression(new CodeTypeReferenceExpression("myCommand"), "CommandText"), new CodeSnippetExpression( str) ));
             Try.TryStatements.Add(new CodeAssignStatement(new CodePropertyReferenceExpression(new CodeTypeReferenceExpression("myCommand"), "Connection"), new CodeFieldReferenceExpression(new CodeTypeReferenceExpression("Common"), "Conn")));
             Try.TryStatements.Add(new CodeAssignStatement(new CodeVariableReferenceExpression("myReader"), new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myCommand"), "ExecuteReader")));
