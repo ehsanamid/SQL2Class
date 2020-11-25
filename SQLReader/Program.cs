@@ -31,7 +31,7 @@ namespace DCS
             Global.Instance.SqliteDatabase.Save2CSV();
             
             generateCode(new CSharpCodeProvider());
-            //generateCode(new CSharpCodeProvider() , "tblProject");
+            //generateCode(new CSharpCodeProvider() , "tblLinkedpartInputTokens");
             
         }
 
@@ -893,6 +893,9 @@ namespace DCS
 								break;
 							case "datetime":
 								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetDateTime");
+								break;
+							case "boolean":
+								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetBoolean");
 								break;
 							default:
 								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetInt64");

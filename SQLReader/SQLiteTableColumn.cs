@@ -177,6 +177,7 @@ namespace DCS
                     case "bigint": return typeof(System.Int64);
                     case "binary": return typeof(System.Byte).MakeArrayType();
                     case "bit": return typeof(System.Boolean);
+                    case "boolean": return typeof(System.Boolean);
                     case "char": return typeof(System.String);
                     case "date": return typeof(System.DateTime);
                     case "datetime": return typeof(System.DateTime);
@@ -238,6 +239,7 @@ namespace DCS
                     case "bigint": return typeof(System.Int64);
                     case "binary": return typeof(System.Byte).MakeArrayType();
                     case "bit": return typeof(System.Boolean);
+                    case "boolean": return typeof(System.Boolean);
                     case "char": return typeof(System.String);
                     case "date": return typeof(System.DateTime);
                     case "datetime": return typeof(System.DateTime);
@@ -303,6 +305,7 @@ namespace DCS
                     case "bigint": return "DbType.Int64";
                     case "binary": return "DbType.Binary";
                     case "bit": return "DbType.Boolean";
+                    case "boolean": return "DbType.Boolean";
                     case "char": return "DbType.String";
                     case "date": return "DbType.DateTime";
                     case "datetime": return "DbType.DateTime";

@@ -99,6 +99,7 @@ namespace DCS
                 case "bigint": return "SqlDbType.BigInt";
                 case "binary": return "SqlDbType.Binary";
                 case "bit": return "SqlDbType.Bit";
+                case "boolean": return "SqlDbType.Boolean";
                 case "char": return "SqlDbType.Char";
                 case "date": return "SqlDbType.Date";
                 case "datetime": return "SqlDbType.DateTime";
