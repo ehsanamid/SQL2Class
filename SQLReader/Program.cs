@@ -25,19 +25,19 @@ namespace DCS
         static void Main()
         {
             //SQLConnSet = new SQLiteConnectionStringBuilder("D:\\DSC.dev\\Source-VS11\\Source-VS11\\Source-VS11\\KTC_DATA\\Phase2021.Sqlite");
-            Global.Instance.databaseFullpath = @"Z:\Share\EhsanAmid\GitHub\VP2FT\GLNG3.db";
+            Global.Instance.databaseFullpath = @"Z:\Share\EhsanAmid\Convert\GLNG3.db";
             Global.Instance.Init();
             Global.Instance.SqliteDatabase.LoadAssociatedObjects();
             Global.Instance.SqliteDatabase.Save2CSV();
             
             generateCode(new CSharpCodeProvider());
-            //generateCode(new CSharpCodeProvider() , "tblLinkedpartInputTokens");
+            //generateCode(new CSharpCodeProvider() , "tblProject");
             
         }
 
         static void generateCode(CodeDomProvider provider,string tablename)
         {
-            Global.Instance.SqliteDatabase.databaseName = @"Z:\Share\EhsanAmid\GitHub\VP2FT\VP2FTConvert\SQLite";
+            Global.Instance.SqliteDatabase.databaseName = @"Z:\Share\EhsanAmid\Convert\VP2FTConvert\SQLite";
             foreach (SQLiteTable _sqlitetable in Global.Instance.SqliteDatabase.listSQLiteTable)
             {
                 if (_sqlitetable.tableName == tablename)
@@ -49,7 +49,7 @@ namespace DCS
         }
         static void generateCode(CodeDomProvider provider)
         {
-            Global.Instance.SqliteDatabase.databaseName =  @"Z:\Share\EhsanAmid\GitHub\VP2FT\VP2FTConvert\SQLite";
+            Global.Instance.SqliteDatabase.databaseName =  @"Z:\Share\EhsanAmid\Convert\VP2FTConvert\SQLite";
             foreach (SQLiteTable _sqlitetable in Global.Instance.SqliteDatabase.listSQLiteTable)
             {
                 generateTableCode(_sqlitetable, provider);
@@ -60,7 +60,7 @@ namespace DCS
         {
 
 
-            string outputpath = @"Z:\Share\EhsanAmid\GitHub\VP2FT\VP2FTConvert\SQLite";
+            string outputpath = @"Z:\Share\EhsanAmid\Convert\VP2FTConvert\SQLite";
             string filename = Path.Combine(outputpath, _sqlitetable.tableName + "." + provider.FileExtension.Replace(".", ""));
             
             #region Making the output path
@@ -896,6 +896,9 @@ namespace DCS
 								break;
 							case "boolean":
 								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetBoolean");
+								break;
+							case "real":
+								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetFloat");
 								break;
 							default:
 								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetInt64");
