@@ -30,8 +30,8 @@ namespace DCS
             Global.Instance.SqliteDatabase.LoadAssociatedObjects();
             Global.Instance.SqliteDatabase.Save2CSV();
             
-            generateCode(new CSharpCodeProvider());
-            //generateCode(new CSharpCodeProvider() , "tblProject");
+            //generateCode(new CSharpCodeProvider());
+            generateCode(new CSharpCodeProvider() , "tblProject");
             
         }
 
@@ -888,6 +888,7 @@ namespace DCS
 						switch(col.ColumnType.ToLower())
 						{
 							case "string":
+							case "text":
 							case "varchar":
 								cmieAddRange = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("myReader"), "GetString");
 								break;
